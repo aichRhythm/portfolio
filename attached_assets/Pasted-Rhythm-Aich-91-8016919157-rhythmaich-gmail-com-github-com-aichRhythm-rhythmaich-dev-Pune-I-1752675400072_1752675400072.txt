@@ -1,0 +1,95 @@
+Rhythm Aich
++91-8016919157 | rhythmaich@gmail.com | github.com/aichRhythm | rhythmaich.dev | Pune, India
+Hello! I am a React and React Native developer with experience creating robust, user-friendly applications, primarily
+for the banking, insurance and financial services sector. I specialize in building scalable, high-performance solutions
+that enhance user experience and streamline business operations.
+Technical Skills
+Programming Languages: TypeScript, JavaScript, HTML, CSS, XML, JSON, Python, Swift, Kotlin, SQL,
+GraphQL
+Frameworks: React, React Native, Node.js, Next.js, Electron, Redux, Jest, JWT Authentication, Material UI,
+TailwindCSS, styled-components, Bootstrap
+Developer Tools: Git, GitHub, VSCode, IntelliJ, Eclipse, Android Studio, XCode, Postman, Swagger, Figma,
+Docker, Webpack, Babel, npm, pnpm, ESLint, Prettier, Jira, Confluence, BitBucket, SourceTree
+Database Management Systems: PostgreSQL, MongoDB, MySQL, Redis
+Cloud and DevOps: Firebase, Docker, Kubernetes, CI/CD pipelines (GitHub Actions)
+Testing: Jest, React Testing Library, Enzyme
+Concepts and Methodologies: Agile, RESTful APIs, SOAP, DOM, AJAX, Microservices architecture, CI/CD,
+Test-Driven Development (TDD), Object Oriented Programming, SOLID principles
+Experience
+Associate Consultant | Capgemini India October 2022 – Present
+Pune, India
+Mobile Banking Application/Developer Tools and Libraries | React Native, Jest, Github Actions
+• Designed and developed high-performance, reusable UI components (e.g., datepicker, dropdown,
+typeahead, collapsible menus) from scratch using TypeScript and React Native, for a major banking
+client, with a focus on pixel-perfect custom designs and animations. Delivered a seamless and polished user
+experience across both Android and iOS platforms.
+• Leveraged React Native bridging technology to implement backend utility modules, including logger, push
+notifications, QR code scanner, and document/media viewer. Integrated native iOS and Android
+functionalities into the React Native ecosystem, ensuring cross-platform consistency and leveraging
+platform-specific capabilities to enhance performance and functionality.
+• Implemented automated testing using Jest and React Testing Library, achieving 95% test coverage for
+both unit and integration tests, significantly reducing bugs and regressions.
+• Utilized Firebase and Apple Push Notification Service (APNs) for push notifications and real-time
+updates, enabling timely communication with users and enhancing the customer experience by providing
+instant updates related to account activities and transaction statuses.
+• Optimized app performance by implementing code splitting, lazy loading, and memoization techniques,
+significantly reducing load times and improving memory efficiency. Used React Profiler and Chrome
+DevTools to measure and analyze performance bottlenecks, achieving a 30% reduction in load time and a
+20% improvement in memory usage. Enhanced rendering performance for data-intensive features like
+media viewing and QR scanning, ensuring a seamless user experience across low-end and high-end devices.
+Metrics were tracked using Google Analytics and in-app performance monitoring tools, resulting in a
+25% increase in user engagement on resource-constrained devices.
+• Implemented CI/CD pipelines using GitHub Actions, automating the process of building, testing, and
+deploying the app to Google Play and Apple App Store, which streamlined release cycles and reduced manual
+intervention.
+Real-time Banking Analytics Dashboard | React, GraphQL, PostgreSQL, Redis
+• Developed a real-time banking analytics dashboard for a major banking client using React and a
+microfrontend architecture, enabling independent development, testing, and deployment of modular UI
+components for features like user transaction details, account statistics, and customer feedback. Built on top of
+a pre-existing Node.js backend system to deliver seamless integration.
+• Centralized application state management using Redux Toolkit, enabling predictable state transitions across
+microfrontends and improving maintainability. Integrated Thunk middleware for handling asynchronous
+operations and used Redux DevTools to streamline debugging and enhance developer productivity.
+• Collaborated in an Agile development environment with bi-weekly sprints and daily standups, coordinating
+with cross-functional teams to prioritize features and rapidly deliver incremental improvements based on client
+feedback.
+• Optimized PostgreSQL database queries for large-scale transactional data across 100+ bank branches,
+reducing query execution time through indexing strategies and query refactoring. Implemented database
+partitioning and leveraged Redis for caching query results, improving data retrieval performance for real-time
+insights.
+• Ensured consistent UI styling across microfrontends using Material UI, while allowing each module to
+maintain visual independence. Improved development efficiency by creating a shared component library for
+reusable UI elements.
+Internship Trainee | Capgemini India February 2022 – April 2022
+Pune, India
+API layer of Customer Service Application | Express, Node.js, MongoDB, Stripe, SendGrid
+• Built and maintained RESTful APIs using Express for the customer service application of an insurance
+giant, enabling seamless interactions between customers and backend systems.
+• Integrated third-party APIs such as Stripe for payment processing and SendGrid for email communication,
+streamlining the customer service experience.
+• Utilized MongoDB for database operations, ensuring efficient handling of dynamic, schema-less data
+structures related to customer profiles, transaction history, and support tickets.
+Production Intern | Nestl´e India April 2021 – May 2021
+Goa, India
+Automation of product packaging line | Microsoft Excel, Microsoft Powerpoint
+• Designed and evaluated automation solutions to streamline sauce packaging, conducting feasibility studies and
+vendor assessments. Selected a solution projected to increase throughput by 20% and reduce labor costs.
+• Developed a quantitative cost model by integrating data from multiple sources, estimating project costs at
+$200,000+ for equipment, software, and materials. Identified cost-saving strategies projected to save 10% over 2
+years, validated through vendor quotes and historical cost analysis.
+• Optimized labor efficiency by analyzing staffing requirements and collaborating with operations teams.
+Implemented a new staffing model that reduced labor needs by 12%, measured through productivity
+tracking and overtime reduction reports.
+Education
+National Institute of Technology, Durgapur Durgapur, India
+Bachelor of Technology, Chemical Engineering June. 2018 – June 2022
+CGPA - 7.62
+Achievements
+Rising Star Award | Capgemini India 2023
+In recognition of outstanding performance and lasting contribution in H2-2023
+Best Paper Award | 35th Indian Engineering Congress 2020
+For presenting my paper in the Chemical Engineering Division at the 35th Indian Engineering Congress
+Publications
+Optimization of High Density Polyethylene (HDPE) Reactor Using Artificial Intelligence
+Jounal of Interdisciplinary Research in Technology and Management 2021
+Published by Taylor and Francis Group
