@@ -7,6 +7,7 @@ import Portfolio from "@/pages/portfolio";
 import NotFound from "@/pages/not-found";
 import { useLenis } from "@/hooks/use-lenis";
 import { useCursor } from "@/hooks/use-cursor";
+import { useIsMobile } from "./hooks/use-mobile";
 
 function Router() {
   return (
@@ -20,12 +21,17 @@ function Router() {
 function App() {
   useLenis();
   const { cursorRef, followerRef } = useCursor();
+  const isMobile = useIsMobile();
 
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <div className="cursor" ref={cursorRef}></div>
-        <div className="cursor-follower" ref={followerRef}></div>
+        {!isMobile && (
+          <>
+            <div ref={cursorRef} className="cursor" />
+            <div ref={followerRef} className="cursor-follower" />
+          </>
+        )}
         <Toaster />
         <Router />
       </TooltipProvider>

@@ -14,10 +14,10 @@ export function useCursor() {
       cursor.style.left = e.clientX - 10 + 'px';
       cursor.style.top = e.clientY - 10 + 'px';
       
-      setTimeout(() => {
+      
         follower.style.left = e.clientX - 20 + 'px';
         follower.style.top = e.clientY - 20 + 'px';
-      }, 100);
+      
     };
 
     const handleMouseOver = (e: MouseEvent) => {
