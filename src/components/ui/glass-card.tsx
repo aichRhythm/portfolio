@@ -12,7 +12,7 @@ export default function GlassCard({ children, className = "", delay = 0 }: Glass
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay }}
-      whileHover={{ y: -5 }}
+      // whileHover={{ y: -5 }}
       className={`glass-effect rounded-2xl p-8 card-hover ${className}`}
     >
       {children}
