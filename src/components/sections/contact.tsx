@@ -33,12 +33,12 @@ export default function Contact() {
       // Here you would typically send the form data to your backend
       // For now, we'll just show a success toast
       await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
-      
+
       toast({
         title: "Message sent successfully!",
         description: "Thank you for your message. I'll get back to you soon.",
       });
-      
+
       setFormData({ name: "", email: "", subject: "", message: "" });
     } catch {
       toast({
@@ -63,7 +63,7 @@ export default function Contact() {
         >
           Let's Work Together
         </motion.h2>
-        
+
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-8">
             <motion.p
@@ -73,11 +73,11 @@ export default function Contact() {
               viewport={{ once: true }}
               className="text-lg text-muted-foreground mb-6"
             >
-              Ready to build something amazing? Let's discuss your next project and create 
+              Ready to build something amazing? Let's discuss your next project and create
               exceptional user experiences together.
             </motion.p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Contact Info */}
             <GlassCard className="p-6">
@@ -109,11 +109,14 @@ export default function Contact() {
                   </div>
                 </div>
               </div>
-              
+
               <div className="mt-6">
                 <h4 className="text-md font-semibold mb-3 text-foreground">Follow Me</h4>
                 <div className="flex space-x-4">
-                  <a href="https://github.com/aichRhythm" className="text-muted-foreground hover:text-accent transition-colors">
+                  <a href="https://github.com/aichRhythm"
+                    className="text-muted-foreground hover:text-accent transition-colors"
+                    target="_blank"
+                    rel="noopener noreferrer">
                     <Github className="w-5 h-5" />
                   </a>
                   <a href="https://rhythmaich.dev" className="text-muted-foreground hover:text-accent transition-colors">
@@ -122,7 +125,7 @@ export default function Contact() {
                 </div>
               </div>
             </GlassCard>
-            
+
             {/* Contact Form */}
             <GlassCard className="p-6">
               <h3 className="text-xl font-bold mb-4 text-accent">Send Message</h3>
