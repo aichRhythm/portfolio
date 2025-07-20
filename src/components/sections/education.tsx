@@ -41,12 +41,12 @@ export default function Education() {
             </div>
             <h3 className="text-xl font-bold mb-3">Achievements</h3>
             <div className="space-y-4">
-              <div className="border-l-4 border-success pl-3">
+              <div className="border-l-4 border-accent pl-3">
                 <h4 className="text-md font-semibold text-foreground">Rising Star Award</h4>
                 <p className="text-success text-sm">Capgemini India 2023</p>
                 <p className="text-muted-foreground text-xs">Outstanding performance in H2-2023</p>
               </div>
-              <div className="border-l-4 border-success pl-3">
+              <div className="border-l-4 border-accent pl-3">
                 <h4 className="text-md font-semibold text-foreground">Best Paper Award</h4>
                 <p className="text-success text-sm">35th Indian Engineering Congress 2020</p>
                 <p className="text-muted-foreground text-xs">Chemical Engineering Division</p>
