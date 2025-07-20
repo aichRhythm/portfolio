@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { ExternalLink, Github } from "lucide-react";
-import { Button } from "@/components/ui/button";
+// import { ExternalLink, Github } from "lucide-react";
+// import { Button } from "@/components/ui/button";
 // import GlassCard from "@/components/ui/glass-card";
 
 export default function Projects() {
@@ -155,7 +155,7 @@ export default function Projects() {
                     </span>
                   ))}
                 </div>
-                <div className="flex space-x-4">
+                {/* <div className="flex space-x-4">
                   <Button
                     variant="ghost"
                     size="sm"
@@ -172,7 +172,7 @@ export default function Projects() {
                     <Github className="w-3 h-3 mr-1" />
                     Details
                   </Button>
-                </div>
+                </div> */}
               </div>
             </motion.div>
           ))}
