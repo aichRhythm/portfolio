@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Code } from "lucide-react";
+import { Menu, X, Code, Code2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Navigation() {
@@ -32,6 +32,7 @@ export default function Navigation() {
           <div className="text-2xl font-bold gradient-text flex items-center gap-2">
             <Code className="w-6 h-6" />
             Rhythm Aich
+            <Code2 className="w-6 h-6" />
           </div>
           
           {/* Desktop Navigation */}
