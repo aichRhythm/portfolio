@@ -12,11 +12,10 @@ export default async (req: VercelRequest, res: VercelResponse) => {
 
   try {
     await resend.emails.send({
-      from: process.env.FROM_EMAIL!,
+      from: `Portfolio Contact <${process.env.FROM_EMAIL!}>`,
       to: process.env.TO_EMAIL!,
       subject: subject,
       html: `
-        <h3>You have a new message from a visitor to the website</h3>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Message:</strong></p>
