@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send, Github, Globe } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Github, Globe, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -124,13 +124,19 @@ export default function Contact() {
               </div>
 
               <div className="mt-6">
-                <h4 className="text-md font-semibold mb-3 text-foreground">Follow Me</h4>
-                <div className="flex space-x-4">
+                <h4 className="text-md font-semibold mb-4 text-foreground">Follow Me</h4>
+                <div className="flex space-x-8">
                   <a href="https://github.com/aichRhythm"
                     className="text-muted-foreground hover:text-accent transition-colors"
                     target="_blank"
                     rel="noopener noreferrer">
                     <Github className="w-5 h-5" />
+                  </a>
+                  <a href="https://www.linkedin.com/in/rhythm-aich/"
+                    className="text-muted-foreground hover:text-accent transition-colors"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    <Linkedin className="w-5 h-5" />
                   </a>
                   <a href="https://rhythmaich.dev" className="text-muted-foreground hover:text-accent transition-colors">
                     <Globe className="w-5 h-5" />
