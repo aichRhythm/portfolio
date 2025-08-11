@@ -52,6 +52,14 @@ export default function Navigation() {
                 {item.label}
               </button>
             ))}
+            <a
+                className="block w-full text-left py-2 hover:text-accent transition-colors"
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Resume
+              </a>
           </div>
           
           {/* Mobile Menu Button */}
@@ -83,6 +91,14 @@ export default function Navigation() {
                 {item.label}
               </button>
             ))}
+            <a
+                className="block w-full text-left py-2 hover:text-accent transition-colors"
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Resume
+              </a>
           </div>
         )}
       </div>

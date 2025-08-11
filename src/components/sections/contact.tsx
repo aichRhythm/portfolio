@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send, Github, Globe, Linkedin } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Github, Globe, Linkedin, FileUser } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -30,8 +30,6 @@ export default function Contact() {
     setIsSubmitting(true);
 
     try {
-      // await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
-
       const res = await fetch("/api/send-message", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -140,6 +138,16 @@ export default function Contact() {
                   </a>
                   <a href="https://rhythmaich.dev" className="text-muted-foreground hover:text-accent transition-colors">
                     <Globe className="w-5 h-5" />
+                  </a>
+                </div>
+              </div>
+              <div className="mt-6">
+                <h4 className="text-md font-semibold mb-4 text-foreground">My Resume</h4>
+                <div className="flex space-x-8">
+                  <a href="/resume.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer" className="text-muted-foreground hover:text-accent transition-colors">
+                    <FileUser className="w-5 h-5" />
                   </a>
                 </div>
               </div>

@@ -32,23 +32,31 @@ export default function Portfolio() {
               <a href="#experience" className="text-muted-foreground hover:text-accent transition-colors">Experience</a>
               <a href="#projects" className="text-muted-foreground hover:text-accent transition-colors">Projects</a>
               <a href="#contact" className="text-muted-foreground hover:text-accent transition-colors">Contact</a>
+              <a
+                className="text-muted-foreground hover:text-accent transition-colors"
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Resume
+              </a>
             </div>
             <div className="flex space-x-8">
               <a href="https://github.com/aichRhythm"
-                    className="text-muted-foreground hover:text-accent transition-colors"
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    <Github className="w-5 h-5" />
-                  </a>
-                  <a href="https://www.linkedin.com/in/rhythm-aich/"
-                    className="text-muted-foreground hover:text-accent transition-colors"
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    <Linkedin className="w-5 h-5" />
-                  </a>
-                  <a href="https://rhythmaich.dev" className="text-muted-foreground hover:text-accent transition-colors">
-                    <Globe className="w-5 h-5" />
-                  </a>
+                className="text-muted-foreground hover:text-accent transition-colors"
+                target="_blank"
+                rel="noopener noreferrer">
+                <Github className="w-5 h-5" />
+              </a>
+              <a href="https://www.linkedin.com/in/rhythm-aich/"
+                className="text-muted-foreground hover:text-accent transition-colors"
+                target="_blank"
+                rel="noopener noreferrer">
+                <Linkedin className="w-5 h-5" />
+              </a>
+              <a href="https://rhythmaich.dev" className="text-muted-foreground hover:text-accent transition-colors">
+                <Globe className="w-5 h-5" />
+              </a>
             </div>
           </div>
           <div className="border-t border-muted mt-6 pt-6 text-center text-muted-foreground">
