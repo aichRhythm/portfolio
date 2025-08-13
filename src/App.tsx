@@ -20,7 +20,7 @@ function Router() {
 
 function App() {
   useLenis();
-  const { cursorRef, followerRef } = useCursor();
+  const { cursorRef } = useCursor();
   const isMobile = useIsMobile();
 
   return (
@@ -29,7 +29,6 @@ function App() {
         {!isMobile && (
           <>
             <div ref={cursorRef} className="cursor" />
-            <div ref={followerRef} className="cursor-follower" />
           </>
         )}
         <Toaster />

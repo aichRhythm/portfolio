@@ -49,32 +49,21 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background: hsl(217, 91%, 60%);
     pointer-events: none;
     z-index: 9999;
-    transition: all 0.1s ease;
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), background 0.15s;
     mix-blend-mode: difference;
   }
-  
-  .cursor-follower {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 2px solid hsl(217, 91%, 60%);
-    pointer-events: none;
-    z-index: 9998;
-    transition: all 0.3s ease;
-    background: transparent;
+
+  a, button, input, textarea, [role="button"] {
+  cursor: none !important;
   }
-  
   .cursor.hover {
-    transform: scale(1.5);
+    transform: scale(1.8);
     background: hsl(142, 76%, 36%);
   }
   
