@@ -48,12 +48,12 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">
+          <h1 className="text-4xl md:text-6xl font-bold mb-8">
             <span className="block text-muted-foreground">Hello, I'm</span>
             <span className="gradient-text">Rhythm Aich</span>
           </h1>
-          <div className="text-lg md:text-xl text-muted-foreground mb-6 h-6">
-            <span className="typing-animation">React & React Native Developer</span>
+          <div className="text-lg md:text-xl text-muted-foreground mb-8 h-6">
+            <span>React & React Native Developer</span>
           </div>
           <AnimatedText
             text="Specialized in building scalable, high-performance applications for banking, insurance, and financial services. Creating robust solutions that enhance user experience and streamline business operations."
