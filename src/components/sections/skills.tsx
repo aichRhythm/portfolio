@@ -12,7 +12,7 @@ export default function Skills() {
     {
       icon: Layers,
       title: "Frameworks & Libraries",
-      skills: ["React", "React Native", "Node.js", "Next.js", "Redux", "Material UI", "TailwindCSS"],
+      skills: ["React", "React Native", "Node.js", "Next.js", "Redux", "FastAPI", "Fastify", "Material UI", "TailwindCSS"],
     },
     {
       icon: Settings,
@@ -27,7 +27,7 @@ export default function Skills() {
     {
       icon: Smartphone,
       title: "Mobile Development",
-      skills: ["React Native", "iOS", "Android", "Cross-platform", "Native Bridging"],
+      skills: ["React Native", "Native Bridging"],
     },
     {
       icon: Cog,

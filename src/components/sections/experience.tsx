@@ -5,9 +5,18 @@ import GlassCard from "@/components/ui/glass-card";
 export default function Experience() {
   const experiences = [
     {
+      title: "Associate",
+      company: "Bain and Company",
+      period: "October 2025 – Present",
+      location: "Bengaluru, India",
+      projects: [
+        
+      ],
+    },
+    {
       title: "Associate Consultant",
       company: "Capgemini India",
-      period: "October 2022 – Present",
+      period: "October 2022 – October 2025",
       location: "Pune, India",
       projects: [
         {
