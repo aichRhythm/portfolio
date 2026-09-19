@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 package-lock.json
+
+# Local media files — served from Vercel Blob in production, not committed
+public/media/

@@ -1,41 +1,33 @@
 import { Switch, Route } from "wouter";
-import { queryClient } from "./lib/queryClient";
-import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { SmoothScrollProvider } from "@/components/providers/smooth-scroll-provider";
+import { SkipLink } from "@/components/layout/skip-link";
+import { ScrollProgress } from "@/components/layout/scroll-progress";
+import { Cursor } from "@/components/layout/cursor";
+import { Nav } from "@/components/layout/nav";
+import { Footer } from "@/components/layout/footer";
 import Portfolio from "@/pages/portfolio";
 import NotFound from "@/pages/not-found";
-import { useLenis } from "@/hooks/use-lenis";
-import { useCursor } from "@/hooks/use-cursor";
-import { useIsMobile } from "./hooks/use-mobile";
 
-function Router() {
+export default function App() {
   return (
-    <Switch>
-      <Route path="/" component={Portfolio} />
-      <Route component={NotFound} />
-    </Switch>
-  );
-}
-
-function App() {
-  useLenis();
-  const { cursorRef } = useCursor();
-  const isMobile = useIsMobile();
-
-  return (
-    <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        {!isMobile && (
-          <>
-            <div ref={cursorRef} className="cursor" />
-          </>
-        )}
-        <Toaster />
-        <Router />
+        <SmoothScrollProvider>
+          <SkipLink />
+          <ScrollProgress />
+          <Cursor />
+          <div className="grain-overlay" aria-hidden />
+          <Nav />
+          <main id="main">
+            <Switch>
+              <Route path="/" component={Portfolio} />
+              <Route component={NotFound} />
+            </Switch>
+          </main>
+          <Footer />
+          <Toaster />
+        </SmoothScrollProvider>
       </TooltipProvider>
-    </QueryClientProvider>
   );
 }
-
-export default App;

@@ -1,21 +1,29 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import { site } from "@/content/site";
+import { useSmoothScroll } from "@/components/providers/smooth-scroll-provider";
 
 export default function NotFound() {
-  return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gray-50">
-      <Card className="w-full max-w-md mx-4">
-        <CardContent className="pt-6">
-          <div className="flex mb-4 gap-2">
-            <AlertCircle className="h-8 w-8 text-red-500" />
-            <h1 className="text-2xl font-bold text-gray-900">404 Page Not Found</h1>
-          </div>
+  const { scrollTo } = useSmoothScroll();
 
-          <p className="mt-4 text-sm text-gray-600">
-            Did you forget to add the page to the router?
-          </p>
-        </CardContent>
-      </Card>
-    </div>
+  return (
+    <section className="flex min-h-[100svh] items-center pt-28 pb-20">
+      <div className="mx-auto w-full max-w-[1440px] px-6 md:px-10">
+        <p className="mono-label text-accent">Error 404</p>
+        <h1 className="display mt-6 text-[clamp(2.5rem,9vw,6rem)] text-ink">
+          Nothing here.
+        </h1>
+        <p className="mt-6 max-w-md text-base leading-relaxed text-ink-muted">
+          This page doesn't exist — or it moved somewhere quieter.
+        </p>
+        <button
+          type="button"
+          onClick={() => scrollTo("#top")}
+          className="btn btn-outline mt-10 inline-flex"
+        >
+          <ArrowLeft className="h-3.5 w-3.5" />
+          Back to {site.name}
+        </button>
+      </div>
+    </section>
   );
 }

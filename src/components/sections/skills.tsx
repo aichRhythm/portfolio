@@ -1,78 +1,51 @@
-import { motion } from "framer-motion";
-import { Code, Layers, Settings, Database, Smartphone, Cog } from "lucide-react";
-import GlassCard from "@/components/ui/glass-card";
+import { skillGroups } from "@/content/skills";
+import { Section } from "@/components/motion/section";
+import { Reveal } from "@/components/motion/reveal";
 
-export default function Skills() {
-  const skillCategories = [
-    {
-      icon: Code,
-      title: "Programming Languages",
-      skills: ["TypeScript", "JavaScript", "Python", "Swift", "Kotlin", "SQL", "GraphQL"],
-    },
-    {
-      icon: Layers,
-      title: "Frameworks & Libraries",
-      skills: ["React", "React Native", "Node.js", "Next.js", "Redux", "FastAPI", "Fastify", "Material UI", "TailwindCSS"],
-    },
-    {
-      icon: Settings,
-      title: "Tools & DevOps",
-      skills: ["Git", "Docker", "Firebase", "CI/CD", "Jest", "Figma", "Kubernetes"],
-    },
-    {
-      icon: Database,
-      title: "Databases",
-      skills: ["PostgreSQL", "MongoDB", "MySQL", "Redis"],
-    },
-    {
-      icon: Smartphone,
-      title: "Mobile Development",
-      skills: ["React Native", "Native Bridging"],
-    },
-    {
-      icon: Cog,
-      title: "Methodologies",
-      skills: ["Agile", "TDD", "Microservices", "RESTful APIs", "SOLID"],
-    },
-  ];
-
+export function Skills() {
   return (
-    <section id="skills" className="py-16 bg-card">
-      <div className="container mx-auto px-6">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-3xl md:text-4xl font-bold text-center mb-12 gradient-text"
-        >
-          Technical Skills
-        </motion.h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {skillCategories.map((category, index) => {
-            const Icon = category.icon;
-            return (
-              <GlassCard key={category.title} delay={index * 0.1} className="p-6">
-                <div className="text-accent text-2xl mb-3">
-                  <Icon className="w-6 h-6" />
-                </div>
-                <h3 className="text-lg font-semibold mb-3">{category.title}</h3>
-                <div className="flex flex-wrap gap-2">
-                  {category.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="bg-secondary px-2 py-1 rounded-full text-xs"
-                    >
-                      {skill}
+    <Section
+      id="skills"
+      index="03"
+      label="Stack"
+      title="Tools I reach for"
+      description="A working list, not a logo wall — the things I've actually shipped with, grouped by where they sit in a build."
+    >
+      <div className="border-t border-line">
+        {skillGroups.map((group, index) => (
+          <div key={group.label} className="velocity-skew">
+            <Reveal
+              y={16}
+              delay={Math.min(index * 0.03, 0.15)}
+              className="group grid grid-cols-12 gap-x-4 gap-y-3 border-b border-line py-6 transition-colors duration-300 hover:bg-surface md:py-7"
+            >
+              <div className="col-span-12 flex items-baseline gap-3 md:col-span-4">
+                <span className="mono-label text-accent">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <h3 className="text-lg tracking-tight text-ink">
+                  {group.label}
+                </h3>
+              </div>
+
+              <ul className="col-span-12 flex flex-wrap items-center gap-x-3 gap-y-2 md:col-span-8">
+                {group.items.map((item, itemIndex) => (
+                  <li key={item} className="flex items-center gap-3">
+                    <span className="text-sm text-ink-muted transition-colors duration-300 group-hover:text-ink">
+                      {item}
                     </span>
-                  ))}
-                </div>
-              </GlassCard>
-            );
-          })}
-        </div>
+                    {itemIndex < group.items.length - 1 && (
+                      <span className="text-ink-line" aria-hidden>
+                        /
+                      </span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+          </div>
+        ))}
       </div>
-    </section>
+    </Section>
   );
 }

@@ -1,142 +1,173 @@
-import { motion } from "framer-motion";
-import { CheckCircle } from "lucide-react";
-import GlassCard from "@/components/ui/glass-card";
+import * as Accordion from "@radix-ui/react-accordion";
+import { FileText, Minus, Plus } from "lucide-react";
+import { achievements, education, roles } from "@/content/experience";
+import { site } from "@/content/site";
+import { Section } from "@/components/motion/section";
+import { Reveal } from "@/components/motion/reveal";
 
-export default function Experience() {
-  const experiences = [
-    {
-      title: "Associate",
-      company: "Bain and Company",
-      period: "October 2025 – Present",
-      location: "Bengaluru, India",
-      projects: [
-        
-      ],
-    },
-    {
-      title: "Associate Consultant",
-      company: "Capgemini India",
-      period: "October 2022 – October 2025",
-      location: "Pune, India",
-      projects: [
-        {
-          name: "Mobile Banking Application",
-          technologies: "React Native, Jest, GitHub Actions",
-          achievements: [
-            "Designed and developed high-performance, reusable UI components using TypeScript and React Native for major banking client",
-            "Implemented React Native bridging for backend utilities including logger, push notifications, and QR scanner",
-            "Achieved 95% test coverage with Jest and React Testing Library",
-            "Optimized performance achieving 30% reduction in load time and 20% improvement in memory usage",
-          ],
-        },
-        {
-          name: "Real-time Banking Analytics Dashboard",
-          technologies: "React, GraphQL, PostgreSQL, Redis",
-          achievements: [
-            "Developed microfrontend architecture enabling independent development and deployment",
-            "Centralized state management using Redux Toolkit across microfrontends",
-            "Optimized PostgreSQL queries for 100+ bank branches with Redis caching",
-          ],
-        },
-      ],
-    },
-    {
-      title: "Internship Trainee",
-      company: "Capgemini India",
-      period: "February 2022 – April 2022",
-      location: "Pune, India",
-      projects: [
-        {
-          name: "API layer of Customer Service Application",
-          technologies: "Express, Node.js, MongoDB, Stripe, SendGrid",
-          achievements: [
-            "Built and maintained RESTful APIs for insurance company customer service",
-            "Integrated Stripe for payment processing and SendGrid for email communication",
-            "Utilized MongoDB for dynamic, schema-less data handling",
-          ],
-        },
-      ],
-    },
-    {
-      title: "Production Intern",
-      company: "Nestlé India",
-      period: "April 2021 – May 2021",
-      location: "Goa, India",
-      projects: [
-        {
-          name: "Automation of Product Packaging Line",
-          technologies: "Microsoft Excel, Microsoft PowerPoint",
-          achievements: [
-            "Designed automation solutions projected to increase throughput by 20%",
-            "Developed cost model estimating $200,000+ project costs",
-            "Reduced labor needs by 12% through optimized staffing model",
-          ],
-        },
-      ],
-    },
-  ];
-
+export function Experience() {
   return (
-    <section id="experience" className="py-16 bg-background">
-      <div className="container mx-auto px-6">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-3xl md:text-4xl font-bold text-center mb-12 gradient-text"
-        >
-          Experience
-        </motion.h2>
-        
-        <div className="max-w-6xl mx-auto">
-          <div className="relative">
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-accent"></div>
-            
-            {experiences.map((experience, index) => (
-              <motion.div
-                key={experience.title}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                viewport={{ once: true }}
-                className="relative mb-8"
-              >
-                <div className="absolute left-6 w-4 h-4 bg-accent rounded-full border-4 border-background"></div>
-                <div className="ml-20">
-                  <GlassCard className="p-6">
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
-                      <h3 className="text-xl font-bold text-accent">{experience.title}</h3>
-                      <span className="text-muted-foreground text-sm">{experience.period}</span>
-                    </div>
-                    <h4 className="text-lg text-success mb-2">{experience.company}</h4>
-                    <p className="text-muted-foreground mb-4 text-sm">{experience.location}</p>
-                    
-                    <div className="space-y-4">
-                      {experience.projects.map((project, projectIndex) => (
-                        <div key={projectIndex} className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                          <div>
-                            <h5 className="text-md font-semibold mb-2 text-foreground">{project.name}</h5>
-                            <p className="text-muted-foreground mb-3 text-sm">{project.technologies}</p>
-                          </div>
-                          <ul className="space-y-2 text-muted-foreground">
-                            {project.achievements.map((achievement, achievementIndex) => (
-                              <li key={achievementIndex} className="flex items-start text-sm">
-                                <CheckCircle className="w-3 h-3 text-success mr-2 mt-1 flex-shrink-0" />
-                                {achievement}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
-                    </div>
-                  </GlassCard>
+    <Section
+      id="experience"
+      index="02"
+      label="Experience"
+      title="Where I've worked"
+      description="Product engineering and consulting across banking, insurance and enterprise — with a metric attached to most of it."
+    >
+      <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+        <div className="lg:col-span-3">
+          <div className="space-y-8 lg:sticky lg:top-28">
+            <Reveal y={18}>
+              <div className="rounded-[6px] border border-line bg-surface p-5">
+                <p className="mono-label text-ink-muted">Now</p>
+                <p className="mt-4 text-sm leading-snug text-ink">
+                  Software Engineer at Bain &amp; Company
+                </p>
+                <p className="mt-2 font-mono text-xs text-accent">
+                  Oct 2025 — Present
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal y={18} delay={0.06}>
+              <dl className="space-y-5">
+                <div>
+                  <dt className="mono-label text-ink-muted">Based in</dt>
+                  <dd className="mt-2 text-sm text-ink">{site.location}</dd>
                 </div>
-              </motion.div>
-            ))}
+                <div>
+                  <dt className="mono-label text-ink-muted">Focus</dt>
+                  <dd className="mt-2 text-sm text-ink">
+                    Product frontends, fullstack delivery
+                  </dd>
+                </div>
+              </dl>
+            </Reveal>
+
+            <Reveal y={18} delay={0.12}>
+              <a
+                href={site.resume}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-outline inline-flex"
+              >
+                <FileText className="h-3.5 w-3.5" />
+                Resume
+              </a>
+            </Reveal>
           </div>
         </div>
+
+        <div className="lg:col-span-9">
+          <Accordion.Root
+            type="single"
+            collapsible
+            defaultValue={`${roles[0].company}-${roles[0].title}`}
+            className="border-t border-line"
+          >
+            {roles.map((role) => {
+              const value = `${role.company}-${role.title}-${role.period}`;
+              return (
+                <Accordion.Item
+                  key={value}
+                  value={value}
+                  className="border-b border-line"
+                >
+                  <Accordion.Header>
+                    <Accordion.Trigger className="group flex w-full items-start justify-between gap-5 py-6 text-left">
+                      <span className="flex flex-1 flex-col gap-2 md:flex-row md:items-baseline md:gap-6">
+                        <span className="flex items-center gap-3 md:w-[40%]">
+                          <span className="display text-xl text-ink transition-colors duration-300 group-hover:text-accent md:text-2xl">
+                            {role.title}
+                          </span>
+                          {role.current && (
+                            <span
+                              className="h-1.5 w-1.5 shrink-0 animate-pulse-dot rounded-full bg-accent"
+                              aria-hidden
+                            />
+                          )}
+                        </span>
+                        <span className="text-sm text-ink-muted md:w-[28%]">
+                          {role.company}
+                        </span>
+                        <span className="mono-label text-ink-muted md:flex-1 md:text-right">
+                          {role.period}
+                        </span>
+                      </span>
+                      <span className="shrink-0 pt-1 text-ink-muted transition-colors duration-300 group-data-[state=open]:text-accent">
+                        <Plus
+                          className="block h-4 w-4 group-data-[state=open]:hidden"
+                          aria-hidden
+                        />
+                        <Minus
+                          className="hidden h-4 w-4 group-data-[state=open]:block"
+                          aria-hidden
+                        />
+                      </span>
+                    </Accordion.Trigger>
+                  </Accordion.Header>
+
+                  <Accordion.Content className="overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
+                    <div className="grid gap-7 pb-9 md:grid-cols-12">
+                      <div className="md:col-span-4">
+                        <p className="text-sm leading-relaxed text-ink-muted">
+                          {role.summary}
+                        </p>
+                        <div className="mt-5 flex flex-wrap gap-2">
+                          {role.stack.map((item) => (
+                            <span key={item} className="tag">
+                              {item}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      <ul className="space-y-3.5 md:col-span-7 md:col-start-6">
+                        {role.highlights.map((highlight) => (
+                          <li
+                            key={highlight}
+                            className="flex gap-3 text-sm leading-relaxed text-ink-muted"
+                          >
+                            <span
+                              className="mt-2 h-1 w-1 shrink-0 bg-accent"
+                              aria-hidden
+                            />
+                            {highlight}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </Accordion.Content>
+                </Accordion.Item>
+              );
+            })}
+          </Accordion.Root>
+        </div>
       </div>
-    </section>
+
+      <Reveal y={20} className="mt-16 md:mt-20">
+        <div className="grid gap-px overflow-hidden rounded-[6px] border border-line bg-line md:grid-cols-3">
+          <div className="bg-surface p-6 md:p-7">
+            <p className="mono-label text-accent">Education</p>
+            <p className="mt-4 text-base leading-snug text-ink">
+              {education.school}
+            </p>
+            <p className="mt-2 text-sm text-ink-muted">{education.degree}</p>
+            <p className="mt-3 font-mono text-xs text-ink-muted">
+              {education.period} · {education.detail}
+            </p>
+          </div>
+
+          {achievements.map((achievement) => (
+            <div key={achievement.title} className="bg-surface p-6 md:p-7">
+              <p className="mono-label text-accent">Achievement</p>
+              <p className="mt-4 text-base leading-snug text-ink">
+                {achievement.title}
+              </p>
+              <p className="mt-2 text-sm text-ink-muted">{achievement.org}</p>
+            </div>
+          ))}
+        </div>
+      </Reveal>
+    </Section>
   );
 }
