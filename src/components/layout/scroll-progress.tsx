@@ -26,17 +26,18 @@ export function ScrollProgress() {
       };
     }
 
-    const onNativeScroll = () => {
-      const limit =
-        document.documentElement.scrollHeight - window.innerHeight;
+    let limit = document.documentElement.scrollHeight - window.innerHeight;
+    const onScroll = () => apply(window.scrollY, limit);
+    const onResize = () => {
+      limit = document.documentElement.scrollHeight - window.innerHeight;
       apply(window.scrollY, limit);
     };
-    onNativeScroll();
-    window.addEventListener("scroll", onNativeScroll, { passive: true });
-    window.addEventListener("resize", onNativeScroll);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize);
     return () => {
-      window.removeEventListener("scroll", onNativeScroll);
-      window.removeEventListener("resize", onNativeScroll);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
     };
   }, [lenis]);
 

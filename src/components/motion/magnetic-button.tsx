@@ -48,8 +48,18 @@ export function MagneticButton({
     const ixTo = gsap.quickTo(inner, "x", { duration: 0.8, ease: "power3.out" });
     const iyTo = gsap.quickTo(inner, "y", { duration: 0.8, ease: "power3.out" });
 
+    // Cache the (untransformed) rect once per hover so we don't force a layout
+    // read on every mousemove — and so the magnetic offset stays stable.
+    let rect: { left: number; top: number; width: number; height: number } | null =
+      null;
+
+    const onEnter = () => {
+      const r = outer.getBoundingClientRect();
+      rect = { left: r.left, top: r.top, width: r.width, height: r.height };
+    };
+
     const onMove = (event: MouseEvent) => {
-      const rect = outer.getBoundingClientRect();
+      if (!rect) return;
       const dx = event.clientX - (rect.left + rect.width / 2);
       const dy = event.clientY - (rect.top + rect.height / 2);
       xTo(dx * strength);
@@ -59,15 +69,18 @@ export function MagneticButton({
     };
 
     const onLeave = () => {
+      rect = null;
       xTo(0);
       yTo(0);
       ixTo(0);
       iyTo(0);
     };
 
+    outer.addEventListener("mouseenter", onEnter);
     outer.addEventListener("mousemove", onMove);
     outer.addEventListener("mouseleave", onLeave);
     return () => {
+      outer.removeEventListener("mouseenter", onEnter);
       outer.removeEventListener("mousemove", onMove);
       outer.removeEventListener("mouseleave", onLeave);
       gsap.killTweensOf([outer, inner]);
