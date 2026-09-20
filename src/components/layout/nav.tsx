@@ -40,8 +40,15 @@ export function Nav() {
   }, []);
 
   const go = (href: string) => {
-    pendingRef.current = href;
-    setOpen(false);
+    if (open) {
+      // Menu open (mobile): close it, then the effect below scrolls once its
+      // cleanup restarts Lenis.
+      pendingRef.current = href;
+      setOpen(false);
+    } else {
+      // Menu closed (desktop): scroll directly.
+      scrollTo(href);
+    }
   };
 
   // Scroll after the menu closes: its cleanup restarts Lenis and unlocks body
