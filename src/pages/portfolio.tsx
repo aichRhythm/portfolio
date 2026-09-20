@@ -4,21 +4,7 @@ import { Experience } from "@/components/sections/experience";
 import { Skills } from "@/components/sections/skills";
 import { OffTheClock } from "@/components/sections/off-the-clock";
 import { Contact } from "@/components/sections/contact";
-import { Marquee } from "@/components/motion/marquee";
 import { PerfNote } from "@/components/layout/perf-note";
-
-const TICKER = [
-  "React",
-  "React Native",
-  "TypeScript",
-  "Next.js",
-  "FastAPI",
-  "PostgreSQL",
-  "Redux Toolkit",
-  "Azure",
-  "Docker",
-  "Jest",
-];
 
 /**
  * Velocity skew is applied to discrete blocks (cards, rows, the ticker) rather
@@ -30,9 +16,8 @@ export default function Portfolio() {
   return (
     <>
       <Hero />
-      <Marquee items={TICKER} />
       <div className="mx-auto w-full max-w-[1440px] px-6 md:px-10">
-        <PerfNote className="mt-4">
+        <PerfNote className="mt-6">
           The ticker speeds up when you do — the skill names are used to being
           flung around.
         </PerfNote>

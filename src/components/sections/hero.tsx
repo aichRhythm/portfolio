@@ -4,7 +4,21 @@ import { AnimatedText } from "@/components/motion/animated-text";
 import { MagneticButton } from "@/components/motion/magnetic-button";
 import { Reveal } from "@/components/motion/reveal";
 import { SocialIconRow } from "@/components/contact/social-links";
+import { Marquee } from "@/components/motion/marquee";
 import { useSmoothScroll } from "@/components/providers/smooth-scroll-provider";
+
+const TICKER = [
+  "React",
+  "React Native",
+  "TypeScript",
+  "Next.js",
+  "FastAPI",
+  "PostgreSQL",
+  "Redux Toolkit",
+  "Azure",
+  "Docker",
+  "Jest",
+];
 
 export function Hero() {
   const { scrollTo } = useSmoothScroll();
@@ -12,7 +26,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-[100svh] flex-col justify-between overflow-hidden pb-10 pt-28 md:pb-14 md:pt-32"
+      className="relative flex min-h-[100svh] flex-col overflow-hidden pt-28 md:pt-32"
     >
       <div
         aria-hidden
@@ -93,7 +107,9 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="mx-auto flex w-full max-w-[1440px] items-end justify-between gap-6 px-6 md:px-10">
+      <div className="flex-1" aria-hidden />
+
+      <div className="mx-auto flex w-full max-w-[1440px] items-end justify-between gap-6 px-6 pb-8 md:px-10 md:pb-10">
         <a
           href="#work"
           onClick={(event) => {
@@ -110,6 +126,8 @@ export function Hero() {
         </p>
         <SocialIconRow size="sm" />
       </div>
+
+      <Marquee items={TICKER} />
     </section>
   );
 }
