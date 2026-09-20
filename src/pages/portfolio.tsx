@@ -5,6 +5,7 @@ import { Skills } from "@/components/sections/skills";
 import { OffTheClock } from "@/components/sections/off-the-clock";
 import { Contact } from "@/components/sections/contact";
 import { Marquee } from "@/components/motion/marquee";
+import { PerfNote } from "@/components/layout/perf-note";
 
 const TICKER = [
   "React",
@@ -30,6 +31,12 @@ export default function Portfolio() {
     <>
       <Hero />
       <Marquee items={TICKER} />
+      <div className="mx-auto w-full max-w-[1440px] px-6 md:px-10">
+        <PerfNote className="mt-4">
+          The ticker speeds up when you do — the skill names are used to being
+          flung around.
+        </PerfNote>
+      </div>
       <Work />
       <Experience />
       <Skills />

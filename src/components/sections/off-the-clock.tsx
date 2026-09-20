@@ -12,6 +12,7 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 import { useSmoothScroll } from "@/components/providers/smooth-scroll-provider";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { PerfNote } from "@/components/layout/perf-note";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -129,6 +130,10 @@ export function OffTheClock() {
                 Music, travel, and small snippets of code. None of it ships to
                 production — that's rather the point.
               </p>
+              <PerfNote className="mt-4">
+                Media is lazy — the good kind, where it only loads when you
+                hover.
+              </PerfNote>
             </Reveal>
 
             <div className="hidden shrink-0 lg:block">

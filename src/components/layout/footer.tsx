@@ -2,6 +2,8 @@ import { ArrowUp } from "lucide-react";
 import { footerLinks, site } from "@/content/site";
 import { SocialIconRow } from "@/components/contact/social-links";
 import { useSmoothScroll } from "@/components/providers/smooth-scroll-provider";
+import { PerfNote } from "@/components/layout/perf-note";
+import { WebVitals } from "@/components/layout/web-vitals";
 
 export function Footer() {
   const { scrollTo } = useSmoothScroll();
@@ -61,7 +63,15 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col gap-5 border-t border-line pt-8 md:flex-row md:items-center md:justify-between">
+        <div className="mt-16 flex flex-col gap-4 border-t border-line pt-8 md:flex-row md:items-end md:justify-between">
+          <PerfNote>
+            No unused JS · ~147 kB gzip · semantic HTML · and it honors
+            reduce-motion, for the calm viewers.
+          </PerfNote>
+          <WebVitals />
+        </div>
+
+        <div className="mt-10 flex flex-col gap-5 border-t border-line pt-8 md:flex-row md:items-center md:justify-between">
           <p className="font-mono text-xs text-ink-muted">
             © 2026 {site.name}. All rights reserved.
           </p>

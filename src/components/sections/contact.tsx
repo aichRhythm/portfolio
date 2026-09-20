@@ -5,6 +5,7 @@ import { Section } from "@/components/motion/section";
 import { Reveal } from "@/components/motion/reveal";
 import { SocialLinks } from "@/components/contact/social-links";
 import { Deferred } from "@/components/layout/deferred";
+import { PerfNote } from "@/components/layout/perf-note";
 import { useLocalTime } from "@/hooks/use-local-time";
 
 const ContactForm = lazy(() =>
@@ -46,6 +47,10 @@ export function Contact() {
         </div>
 
         <div className="velocity-skew lg:col-span-7">
+          <PerfNote className="mb-6">
+            This form shows up only when you scroll here. react-hook-form and
+            zod are waiting in a 23 kB side room.
+          </PerfNote>
           <Deferred rootMargin="400px 0px">
             <ContactForm />
           </Deferred>
