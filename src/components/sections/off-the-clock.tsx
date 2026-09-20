@@ -147,7 +147,7 @@ export function OffTheClock() {
             <div className="hidden shrink-0 lg:block">
               <GuitarStrings />
               <p className="mono-label mt-3 text-right text-ink-muted">
-                Tap a string to play
+                Tap a string or strum to play
               </p>
             </div>
           </div>

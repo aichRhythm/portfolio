@@ -23,51 +23,54 @@ export type OffTheClockEntry = {
 export const offTheClock: OffTheClockEntry[] = [
   {
     type: "travel",
-    title: "Fort off the coast",
+    title: "Where the land runs out",
     caption:
-      "The ocean from a fort on the edge of India. A few days of quiet and sun.",
+      "Cabo de Rama — a fort at the edge of India, holding the sea back with old stone.",
     location: "Goa",
     date: "2025",
     media: { url: "/media/cabo-de-rama.webp", type: "image" },
   },
   {
     type: "travel",
-    title: "Comfy cafe in the hills",
+    title: "Momo and a mountain",
     caption:
-      "A cafe that serves only momos and tea, with a view of the mountains.",
+      "A hill café with a two-item menu — momos and tea — and a view that does the rest.",
     location: "Kurseong",
     date: "2025",
     media: { url: "/media/chandelier.webp", type: "image" },
   },
   {
     type: "travel",
-    title: "Good views, good people and good music",
-    caption: "A Christmas party in a valley in the Himalayas.",
+    title: "A valley Christmas",
+    caption:
+      "A Christmas party in a Himalayan valley, the kind of night where the cold stays outside and the music stays in.",
     location: "Manali",
     date: "2025",
     media: { url: "/media/christmas-performance.webp", type: "image" },
   },
   {
     type: "travel",
-    title: "By the sea, at the very south of India",
+    title: "The bottom of the map",
     caption:
-      "Some of the most beautiful coastline in India, and a few days of quiet and sun.",
+      "Kochi's coast, where the fishing boats drift in and the sun goes down in instalments. A few days of salt and slow.",
     location: "Kochi",
     date: "2026",
     media: { url: "/media/fishing.webp", type: "image" },
   },
   {
     type: "travel",
-    title: "A peak almost obscured by fog",
-    caption: "A vignette from the hills in the Himalayas I grew up near.",
+    title: "Fog, with a mountain in it",
+    caption:
+      "The hills I grew up near, pulling their usual trick — half here, half weather, all memory.",
     location: "Kurseong",
     date: "2023",
     media: { url: "/media/foggy-peak.webp", type: "image" },
   },
   {
     type: "travel",
-    title: "A twisting mountain road almost fully obscured by fog",
-    caption: "Again, a vignette from the hills in the Himalayas I grew up near.",
+    title: "A road that becomes weather",
+    caption:
+      "A mountain road that stops being a road somewhere near the clouds. Same fog, same hills, same way home.",
     location: "Kurseong",
     date: "2023",
     media: { url: "/media/foggy-road.webp", type: "image" },
