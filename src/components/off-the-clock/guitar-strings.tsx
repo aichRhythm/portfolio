@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { cn } from "@/lib/utils";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
+import { useHasFinePointer } from "@/hooks/use-media-query";
 import { useScrollVelocity } from "@/hooks/use-scroll-velocity";
 import {
   CHORDS,
@@ -33,6 +34,9 @@ export function GuitarStrings({ className }: { className?: string }) {
   const pluckingRef = useRef<boolean[]>(STRINGS.map(() => false));
   const speedRef = useRef(0);
   const reduced = useReducedMotion();
+  const fine = useHasFinePointer();
+  const hasTouch = navigator.maxTouchPoints > 0 || "ontouchstart" in window;
+  const isTouch = !fine || hasTouch;
   const { speed } = useScrollVelocity();
   speedRef.current = speed;
 
@@ -76,14 +80,7 @@ export function GuitarStrings({ className }: { className?: string }) {
     return () => cancelAnimationFrame(frame);
   }, [reduced]);
 
-  const pluck = (index: number) => {
-    // Sound: play the fretted note when a chord is selected (skip muted strings).
-    if (chord) {
-      const fret = CHORDS[chord].frets[index];
-      if (fret >= 0) pluckNote(fretFrequency(index, fret));
-    }
-
-    // Visual (unchanged).
+  const pluckVisual = (index: number) => {
     if (reduced) return;
     const proxy = proxiesRef.current[index];
     const path = pathRefs.current[index];
@@ -124,9 +121,30 @@ export function GuitarStrings({ className }: { className?: string }) {
     );
   };
 
+  // Hover a string: pluck that note (desktop strum).
+  const pluck = (index: number) => {
+    if (chord) {
+      const fret = CHORDS[chord].frets[index];
+      if (fret >= 0) pluckNote(fretFrequency(index, fret));
+    }
+    pluckVisual(index);
+  };
+
+  // Tap a chord: strum the whole thing (touch — can't drag across strings).
+  const strumChord = (id: ChordId) => {
+    CHORDS[id].frets.forEach((fret, index) => {
+      if (fret < 0) return; // muted string — no note
+      window.setTimeout(() => {
+        pluckNote(fretFrequency(index, fret));
+        pluckVisual(index);
+      }, index * 30);
+    });
+  };
+
   const selectChord = (id: ChordId) => {
     unlockAudio();
     setChord(id);
+    if (isTouch) strumChord(id);
   };
 
   return (
