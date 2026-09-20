@@ -1,6 +1,9 @@
-import { useLayoutEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+  useLayoutEffect,
+  useRef,
+  useState,
+  type PointerEvent as ReactPointerEvent,
+} from "react";
 import { offTheClock, type OffTheClockEntry } from "@/content/off-the-clock";
 import { MediaCard } from "@/components/off-the-clock/media-card";
 import { Lightbox } from "@/components/off-the-clock/lightbox";
@@ -8,91 +11,104 @@ import { Waveform } from "@/components/off-the-clock/waveform";
 import { GuitarStrings } from "@/components/off-the-clock/guitar-strings";
 import { Reveal } from "@/components/motion/reveal";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
-import { useMediaQuery } from "@/hooks/use-media-query";
-import { useSmoothScroll } from "@/components/providers/smooth-scroll-provider";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useHasFinePointer } from "@/hooks/use-media-query";
 import { cn } from "@/lib/utils";
 import { PerfNote } from "@/components/layout/perf-note";
 
-gsap.registerPlugin(ScrollTrigger);
+/** Auto-advance drift speed in px/s. */
+const SPEED = 80;
 
 /**
- * One horizontal gallery for everything off the clock. On large screens with
- * vertical room the section pins and the track is scrubbed sideways, with each
- * media card revealing through scale + clip-path as it enters. Everywhere else
- * it degrades to a native, snap-scrolling swipe strip.
+ * One horizontal gallery for everything off the clock. The track drifts
+ * sideways on its own (slow, ping-pong), pauses on hover, and can be dragged
+ * to explore — so the page scrolls straight down past it. Under reduced motion
+ * (or on touch) it becomes a plain swipe strip.
  */
 export function OffTheClock() {
   const reduced = useReducedMotion();
-  const hasRoom = useMediaQuery(
-    "(min-width: 1024px) and (min-height: 640px)",
-  );
-  const pinned = hasRoom && !reduced;
+  const fine = useHasFinePointer();
+  const hasTouch = navigator.maxTouchPoints > 0 || "ontouchstart" in window;
+  const isTouch = !fine || hasTouch;
+  const autoScroll = !reduced && !isTouch;
 
-  const { scrollTo } = useSmoothScroll();
   const [active, setActive] = useState<OffTheClockEntry | null>(null);
-  const pinRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-
-  const scrollByCard = (dir: 1 | -1) => {
-    const track = trackRef.current;
-    if (!track) return;
-    const first = track.querySelector<HTMLElement>(".gallery-card");
-    const step = (first ? first.offsetWidth : 340) + 24;
-    if (pinned) {
-      // pinned mode maps page scroll 1:1 to horizontal travel
-      scrollTo(window.scrollY + dir * step, { offset: 0, duration: 1.1 });
-    } else {
-      track.scrollBy({ left: dir * step, behavior: "smooth" });
-    }
-  };
+  const xRef = useRef(0);
+  const directionRef = useRef(-1);
+  const hoveredRef = useRef(false);
+  const pressedRef = useRef(false);
+  const draggingRef = useRef(false);
+  const dragStartRef = useRef({ x: 0, pos: 0 });
 
   useLayoutEffect(() => {
-    const pin = pinRef.current;
     const track = trackRef.current;
-    if (!pinned || !pin || !track) return;
+    if (!track || !autoScroll) return;
 
-    const context = gsap.context(() => {
-      const distance = () =>
-        Math.max(0, track.scrollWidth - window.innerWidth + 80);
+    const distance = () =>
+      Math.max(0, track.scrollWidth - window.innerWidth + 80);
 
-      const scrollTween = gsap.to(track, {
-        x: () => -distance(),
-        ease: "none",
-        scrollTrigger: {
-          trigger: pin,
-          start: "top top",
-          end: () => `+=${distance()}`,
-          pin: true,
-          scrub: true,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-        },
-      });
+    let raf = 0;
+    let last = performance.now();
 
-      gsap.utils.toArray<HTMLElement>(".gallery-card").forEach((card) => {
-        gsap.fromTo(
-          card,
-          { scale: 0.97, opacity: 0.4 },
-          {
-            scale: 1,
-            opacity: 1,
-            ease: "none",
-            scrollTrigger: {
-              trigger: card,
-              containerAnimation: scrollTween,
-              start: "left 96%",
-              end: "left 58%",
-              scrub: true,
-            },
-          },
-        );
-      });
-    }, pinRef);
+    const tick = (now: number) => {
+      const dt = (now - last) / 1000;
+      last = now;
 
-    ScrollTrigger.refresh();
-    return () => context.revert();
-  }, [pinned]);
+      if (!draggingRef.current && !hoveredRef.current) {
+        let x = xRef.current + directionRef.current * SPEED * dt;
+        if (x <= -distance()) {
+          x = -distance();
+          directionRef.current = 1;
+        } else if (x >= 0) {
+          x = 0;
+          directionRef.current = -1;
+        }
+        xRef.current = x;
+        track.style.transform = `translate3d(${x}px, 0, 0)`;
+      }
+
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+
+    return () => cancelAnimationFrame(raf);
+  }, [autoScroll]);
+
+  const onPointerEnter = () => {
+    hoveredRef.current = true;
+  };
+  const onPointerLeave = () => {
+    hoveredRef.current = false;
+    pressedRef.current = false;
+    draggingRef.current = false;
+  };
+  const onPointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (!autoScroll) return;
+    pressedRef.current = true;
+    draggingRef.current = false;
+    dragStartRef.current = { x: event.clientX, pos: xRef.current };
+  };
+  const onPointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (!autoScroll || !pressedRef.current) return;
+    const track = trackRef.current;
+    if (!track) return;
+    const distance = Math.max(0, track.scrollWidth - window.innerWidth + 80);
+    const delta = event.clientX - dragStartRef.current.x;
+    if (!draggingRef.current && Math.abs(delta) < 5) return; // let taps through
+    draggingRef.current = true;
+    const x = Math.max(
+      -distance,
+      Math.min(0, dragStartRef.current.pos + delta),
+    );
+    xRef.current = x;
+    if (x <= -distance) directionRef.current = 1;
+    else if (x >= 0) directionRef.current = -1;
+    track.style.transform = `translate3d(${x}px, 0, 0)`;
+  };
+  const onPointerUp = () => {
+    pressedRef.current = false;
+    draggingRef.current = false;
+  };
 
   return (
     <section
@@ -100,15 +116,7 @@ export function OffTheClock() {
       className="relative scroll-mt-24 border-t border-line"
       aria-labelledby="off-the-clock-title"
     >
-      <div
-        ref={pinRef}
-        className={cn(
-          "relative overflow-hidden",
-          pinned
-            ? "flex h-[100svh] flex-col justify-between py-14"
-            : "py-24 md:py-32",
-        )}
-      >
+      <div className="py-24 md:py-32">
         <div className="mx-auto w-full max-w-[1440px] px-6 md:px-10">
           <Reveal y={16}>
             <div className="flex items-center gap-3">
@@ -145,15 +153,26 @@ export function OffTheClock() {
           </div>
         </div>
 
-        <div className={pinned ? "" : "mt-12 md:mt-14"}>
+        <div
+          onPointerEnter={onPointerEnter}
+          onPointerLeave={onPointerLeave}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={onPointerUp}
+          onPointerCancel={onPointerUp}
+          className={cn(
+            "mt-12 select-none cursor-grab active:cursor-grabbing md:mt-14",
+            autoScroll && "edge-fade overflow-hidden",
+          )}
+        >
           <div
             ref={trackRef}
-            {...(pinned ? {} : { "data-lenis-prevent": "true" })}
+            {...(autoScroll ? {} : { "data-lenis-prevent": "true" })}
             className={cn(
-              "flex gap-5 md:gap-6",
-              pinned
-                ? "w-max px-6 will-change-transform md:px-10"
-                : "snap-x snap-mandatory overflow-x-auto px-6 pb-4 scrollbar-none md:px-10",
+              "flex gap-5 px-6 md:gap-6 md:px-10",
+              autoScroll
+                ? "w-max will-change-transform"
+                : "snap-x snap-mandatory overflow-x-auto pb-4 scrollbar-none",
             )}
           >
             {offTheClock.map((entry, index) => (
@@ -170,7 +189,6 @@ export function OffTheClock() {
                 </div>
               </div>
             ))}
-            {pinned && <div className="w-[8vw] shrink-0" aria-hidden />}
           </div>
         </div>
 
@@ -182,27 +200,9 @@ export function OffTheClock() {
             <div className="min-w-0 flex-1">
               <Waveform />
             </div>
-            <div className="flex shrink-0 items-center gap-4">
-              <p className="mono-label text-ink-muted">
-                {pinned ? "Scroll" : "Swipe"}
-              </p>
-              <button
-                type="button"
-                onClick={() => scrollByCard(-1)}
-                aria-label="Previous media"
-                className="grid h-9 w-9 place-items-center rounded-[4px] border border-line text-ink-muted transition-colors hover:border-amber hover:text-amber"
-              >
-                <ChevronLeft className="h-4 w-4" />
-              </button>
-              <button
-                type="button"
-                onClick={() => scrollByCard(1)}
-                aria-label="Next media"
-                className="grid h-9 w-9 place-items-center rounded-[4px] border border-line text-ink-muted transition-colors hover:border-amber hover:text-amber"
-              >
-                <ChevronRight className="h-4 w-4" />
-              </button>
-            </div>
+            <p className="mono-label shrink-0 text-ink-muted">
+              {autoScroll ? "Drag to explore" : "Swipe"}
+            </p>
           </div>
         </div>
       </div>

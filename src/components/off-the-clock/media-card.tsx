@@ -66,12 +66,7 @@ export function MediaCard({
 
   return (
     <article className="group relative flex h-full flex-col overflow-hidden rounded-[6px] border border-line bg-surface-2">
-      <button
-        type="button"
-        onClick={onOpen}
-        aria-label={`View ${entry.title}`}
-        className="group/media relative block aspect-[4/5] w-full cursor-pointer overflow-hidden bg-carbon-raised text-left lg:aspect-[4/3]"
-      >
+      <div className="group/media relative block aspect-[4/5] w-full overflow-hidden bg-carbon-raised lg:aspect-[4/3]">
         {media?.type === "video" ? (
           <video
             ref={videoRef}
@@ -92,6 +87,7 @@ export function MediaCard({
             src={mediaUrl(media.url)}
             alt={entry.title}
             loading="lazy"
+            draggable={false}
             className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
           />
         ) : (
@@ -107,13 +103,15 @@ export function MediaCard({
           </span>
         )}
 
-        <span
-          aria-hidden
-          className="absolute bottom-4 right-4 grid h-9 w-9 place-items-center rounded-[4px] border border-line bg-carbon-glass text-ink-muted opacity-0 backdrop-blur-sm transition-opacity duration-200 group-hover/media:opacity-100"
+        <button
+          type="button"
+          onClick={onOpen}
+          aria-label={`View ${entry.title}`}
+          className="media-expand absolute bottom-4 right-4 grid h-9 w-9 place-items-center rounded-[4px] border border-line bg-carbon-glass text-ink-muted opacity-0 backdrop-blur-sm transition-opacity duration-200 hover:text-amber group-hover/media:opacity-100"
         >
           <Maximize2 className="h-4 w-4" />
-        </span>
-      </button>
+        </button>
+      </div>
 
       <div className="flex flex-1 flex-col p-5">
         <h3 className="text-lg leading-snug text-ink">{entry.title}</h3>

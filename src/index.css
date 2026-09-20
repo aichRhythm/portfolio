@@ -186,6 +186,31 @@
     transform: skewY(calc(var(--velocity) * 1.6deg));
   }
 
+  /* horizontal edge fade for the auto-advancing gallery */
+  .edge-fade {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 12%,
+      #000 88%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 12%,
+      #000 88%,
+      transparent
+    );
+  }
+
+  /* keep the expand button visible on touch (no hover to reveal it) */
+  @media (hover: none) {
+    .media-expand {
+      opacity: 1;
+    }
+  }
+
   .scrollbar-none {
     scrollbar-width: none;
     -ms-overflow-style: none;
