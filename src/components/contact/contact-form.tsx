@@ -48,6 +48,7 @@ export function ContactForm() {
           name: values.name,
           email: values.email,
           message: values.message,
+          subject: `Portfolio message from ${values.name}`,
         }),
       });
 
