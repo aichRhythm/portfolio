@@ -77,7 +77,7 @@ export function MediaCard({
             ref={videoRef}
             src={mediaUrl(media.url)}
             poster={mediaUrl(media.poster)}
-            preload="metadata"
+            preload="none"
             muted
             loop
             playsInline

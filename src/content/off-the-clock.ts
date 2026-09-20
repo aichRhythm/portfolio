@@ -115,7 +115,11 @@ export const offTheClock: OffTheClockEntry[] = [
       "My take on a song that's harder to sing than it sounds. One take, because the second wasn't any better.",
       date: "2026",
       location: "Bengaluru",
-    media: { url: "/media/let-her-go.mp4", type: "video" },
+    media: {
+      url: "/media/let-her-go.mp4",
+      type: "video",
+      poster: "/media/let-her-go-poster.webp",
+    },
   },
   {
     type: "travel",
@@ -151,7 +155,11 @@ export const offTheClock: OffTheClockEntry[] = [
       "A rainbow forming over the rocks near a waterfall — the kind of thing you miss if you're looking at your phone.",
     location: "Kochi",
     date: "2026",
-    media: { url: "/media/rainbow-over-the-rocks.mp4", type: "video" },
+    media: {
+      url: "/media/rainbow-over-the-rocks.mp4",
+      type: "video",
+      poster: "/media/rainbow-over-the-rocks-poster.webp",
+    },
   },
   {
     type: "travel",
