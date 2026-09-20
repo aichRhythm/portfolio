@@ -4,30 +4,26 @@ import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { useHasFinePointer } from "@/hooks/use-media-query";
 
 /**
- * Custom cursor: a fast dot with a trailing ring, blended with
- * mix-blend-mode: difference. Desktop pointers only — never on touch, never
- * under reduced motion.
+ * Custom cursor: a single blended circle (mix-blend-mode: difference) that
+ * inverts whatever is beneath it, so text it passes over changes color.
+ * Desktop pointers only — never on touch, never under reduced motion.
  */
 export function Cursor() {
-  const dotRef = useRef<HTMLDivElement>(null);
-  const ringRef = useRef<HTMLDivElement>(null);
+  const cursorRef = useRef<HTMLDivElement>(null);
   const fine = useHasFinePointer();
   const reduced = useReducedMotion();
   const enabled = fine && !reduced;
 
   useEffect(() => {
     if (!enabled) return;
-    const dot = dotRef.current;
-    const ring = ringRef.current;
-    if (!dot || !ring) return;
+    const cursor = cursorRef.current;
+    if (!cursor) return;
 
     document.documentElement.classList.add("has-custom-cursor");
-    gsap.set([dot, ring], { opacity: 0 });
+    gsap.set(cursor, { opacity: 0 });
 
-    const dotX = gsap.quickTo(dot, "x", { duration: 0.1, ease: "power2.out" });
-    const dotY = gsap.quickTo(dot, "y", { duration: 0.1, ease: "power2.out" });
-    const ringX = gsap.quickTo(ring, "x", { duration: 0.45, ease: "power3.out" });
-    const ringY = gsap.quickTo(ring, "y", { duration: 0.45, ease: "power3.out" });
+    const xTo = gsap.quickTo(cursor, "x", { duration: 0.1, ease: "power2.out" });
+    const yTo = gsap.quickTo(cursor, "y", { duration: 0.1, ease: "power2.out" });
 
     let visible = false;
     let active = false;
@@ -35,22 +31,18 @@ export function Cursor() {
     const show = (next: boolean) => {
       if (next === visible) return;
       visible = next;
-      gsap.to([dot, ring], { opacity: next ? 1 : 0, duration: 0.25 });
+      gsap.to(cursor, { opacity: next ? 1 : 0, duration: 0.25 });
     };
 
     const setActive = (next: boolean) => {
       if (next === active) return;
       active = next;
-      gsap.to(ring, { scale: next ? 1.65 : 1, duration: 0.3, ease: "power3.out" });
-      gsap.to(dot, { scale: next ? 0.35 : 1, duration: 0.3, ease: "power3.out" });
-      ring.dataset.active = next ? "true" : "false";
+      gsap.to(cursor, { scale: next ? 1.2 : 1, duration: 0.3, ease: "power3.out" });
     };
 
     const onMove = (event: MouseEvent) => {
-      dotX(event.clientX);
-      dotY(event.clientY);
-      ringX(event.clientX);
-      ringY(event.clientY);
+      xTo(event.clientX);
+      yTo(event.clientY);
       show(true);
 
       const target = event.target as HTMLElement | null;
@@ -74,16 +66,11 @@ export function Cursor() {
       document.removeEventListener("mouseleave", onLeave);
       document.removeEventListener("mouseenter", onEnter);
       document.documentElement.classList.remove("has-custom-cursor");
-      gsap.killTweensOf([dot, ring]);
+      gsap.killTweensOf(cursor);
     };
   }, [enabled]);
 
   if (!enabled) return null;
 
-  return (
-    <>
-      <div ref={dotRef} className="cursor-dot" aria-hidden />
-      <div ref={ringRef} className="cursor-ring" data-active="false" aria-hidden />
-    </>
-  );
+  return <div ref={cursorRef} className="cursor" aria-hidden />;
 }
