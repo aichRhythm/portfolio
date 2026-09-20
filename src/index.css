@@ -274,6 +274,38 @@
       opacity: 1;
     }
   }
+
+  @keyframes menu-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes menu-link-in {
+    from {
+      transform: translateY(108%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .menu-overlay {
+    animation: menu-fade-in 0.28s ease-out both;
+  }
+
+  .menu-link {
+    animation: menu-link-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .menu-footer {
+    animation: menu-fade-in 0.4s ease-out 0.45s both;
+  }
 }
 
 @media (hover: none), (pointer: coarse) {

@@ -1,10 +1,17 @@
+import { lazy } from "react";
 import { MapPin } from "lucide-react";
 import { site } from "@/content/site";
 import { Section } from "@/components/motion/section";
 import { Reveal } from "@/components/motion/reveal";
 import { SocialLinks } from "@/components/contact/social-links";
-import { ContactForm } from "@/components/contact/contact-form";
+import { Deferred } from "@/components/layout/deferred";
 import { useLocalTime } from "@/hooks/use-local-time";
+
+const ContactForm = lazy(() =>
+  import("@/components/contact/contact-form").then((m) => ({
+    default: m.ContactForm,
+  })),
+);
 
 export function Contact() {
   const time = useLocalTime(site.timeZone);
@@ -39,9 +46,9 @@ export function Contact() {
         </div>
 
         <div className="velocity-skew lg:col-span-7">
-          <Reveal y={22}>
+          <Deferred rootMargin="400px 0px">
             <ContactForm />
-          </Reveal>
+          </Deferred>
         </div>
       </div>
     </Section>
