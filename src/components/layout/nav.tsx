@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FileText, Menu, X } from "lucide-react";
 import { navLinks, site } from "@/content/site";
 import { useSmoothScroll } from "@/components/providers/smooth-scroll-provider";
@@ -11,6 +11,7 @@ export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("");
+  const pendingRef = useRef<string | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -39,9 +40,18 @@ export function Nav() {
   }, []);
 
   const go = (href: string) => {
+    pendingRef.current = href;
     setOpen(false);
-    scrollTo(href);
   };
+
+  // Scroll after the menu closes: its cleanup restarts Lenis and unlocks body
+  // scroll, and scrolling any earlier would be undone by that cleanup.
+  useEffect(() => {
+    if (open || !pendingRef.current) return;
+    const href = pendingRef.current;
+    pendingRef.current = null;
+    scrollTo(href);
+  }, [open, scrollTo]);
 
   return (
     <>
