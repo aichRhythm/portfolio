@@ -22,9 +22,10 @@ type RevealProps = {
 };
 
 /**
- * Scroll-triggered fade + rise. The hidden state is applied inside a layout
- * effect, so it can never strand content in an invisible state — and reduced
- * motion skips the effect entirely, rendering the final state immediately.
+ * Scroll-triggered fade + rise. Uses opacity (not visibility) so revealed
+ * content stays in the accessibility tree — hiding it would make headings
+ * read as skipped levels. Reduced motion skips the effect entirely, rendering
+ * the final state immediately.
  */
 export function Reveal({
   children,
@@ -44,9 +45,9 @@ export function Reveal({
 
     const animation = gsap.fromTo(
       element,
-      { autoAlpha: 0, y },
+      { opacity: 0, y },
       {
-        autoAlpha: 1,
+        opacity: 1,
         y: 0,
         duration,
         delay,
